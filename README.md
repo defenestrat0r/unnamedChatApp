@@ -12,3 +12,11 @@ Might have to do with the fact that it needs a server to live and feed off of.
   - nodemon (for making me much less frustrated. Imagine if I had to restart the server manually *every* time. Yeesh.)
 - Forms (It's not very exciting but I didn't do anything with this in the previous one)
 - Precursor to something bigger. (I know, ominous)
+## Next Up
+- CSS 
+- Actual rooms
+  - Group chats
+  - Direct messages
+- Saving users
+- Dice roller
+- Possibly hosting it elsewhere (Firebase?)
