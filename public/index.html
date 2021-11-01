@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+	
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,25 +8,32 @@
 
 		<title>Chatot</title>
 	</head>
+
 	<body>
-		<div>
+		<div id="container"> 
+
 			<header>
 				<h1>Chatot</h1>
 			</header>
+
 			<main>
 				<form action="chat.html">
+					<!--Username-->
 					<div>
 						<label for="username">Username</label>
 						<input
-							type="text"
-							name="username"
-							id="username"
-							placeholder="Enter username..."
-							required
+						type="text"
+						name="username"
+						id="username"
+						placeholder="Enter username"
+						required
 						/>
 					</div>
+					
+					<!--Room Select-->
 					<div>
 						<label for="room">Room</label>
+						<!--Dropdown to pick room-->
 						<select name="room" id="room">
 							<option value="CS">Chaotic Stupid</option>
 							<option value="Salt">Saltmarshers</option>
@@ -34,9 +42,13 @@
 							<option value="One">Oneshot Questers</option>
 						</select>
 					</div>
+
 					<button type="submit" class="btn">Join Chat</button>
+
 				</form>
 			</main>
+
 		</div>
 	</body>
+	
 </html>

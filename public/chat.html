@@ -1,31 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
+  <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat away</title>
+
+    <title>Chatot</title>
+
+    <!--QS to read query string from address bar so I can catch username and room selection-->
+    <!--I know, security concerns.-->
+    <!--Will probably change this out for a js script on index.html that sends that data to the server-->
+    <!--Oh, and POST instead of GET-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.10.1/qs.min.js" integrity="sha512-aTKlYRb1QfU1jlF3k+aS4AqTpnTXci4R79mkdie/bp6Xm51O5O3ESAYhvg6zoicj/PD6VYY0XrYwsWLcvGiKZQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!--Client side socket.io cdn to send shit to server-->
     <script src="/socket.io/socket.io.js"></script>
+
+    <!--Apple bottom jeans, main.js with defer-->
     <script src="js/main.js" defer></script>
-</head>
-
-<body>
-
-<ul id="messages"></ul>
-
-<form id="chat">
-    <!--Where we type stuff in-->
-    <input
+  </head>
+  
+  <body>
+    <!--Temporary spot to put all of our messages in-->
+    <!--Using list because I can just display each message as a list item-->
+    <ul id="messages"></ul>
+    
+    <form id="chat">
+      <!--Where we type stuff in. Duh.-->
+      <input
       id="textbox"
       type="text"
       placeholder="Type shit"
       required
       autocomplete="off"
-    />
-    
-    <button id="send-btn">Send</button>
-  </form>
-
-</body>
+      />
+      
+      <button id="send-btn">Send</button>
+    </form>
+  
+  </body>
 
 </html>
