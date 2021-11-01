@@ -22,23 +22,40 @@
   </head>
   
   <body>
-    <!--Temporary spot to put all of our messages in-->
-    <!--Using list because I can just display each message as a list item-->
-    <ul id="messages"></ul>
-    
-    <form id="chat">
-      <!--Where we type stuff in. Duh.-->
-      <input
-      id="textbox"
-      type="text"
-      placeholder="Type shit"
-      required
-      autocomplete="off"
-      />
+    <div id="container">
+
+      <!--Room info-->
+      <header id="room-info">
+        <h1 id="room-name"></h1>
+      </header>
+
+      <section id="users-in-room">
+        <h2>Active Users:</h2>
+        <ol id="users"></ol>
+      </section>
+
+      <!--Temporary spot to put all of our messages in-->
+      <!--Using list because I can just display each message as a list item-->
+      <section id="message-display">
+        <ul id="messages"></ul>
+      </section>  
       
-      <button id="send-btn">Send</button>
-    </form>
-  
+      <section id="inputs">
+        <form id="chat">
+          <!--Where we type stuff in. Duh.-->
+          <input
+          id="textbox"
+          type="text"
+          placeholder="Type shit"
+          required
+          autocomplete="off"
+          />
+          
+          <button id="send-btn">Send</button>
+        </form>
+      </section>
+      
+    </div>  
   </body>
 
 </html>
