@@ -3,6 +3,8 @@ A chat app built with express, socket.io, node.js and keeping my eyes open too l
 ## I am aware it is ugly
 ...and that it probably doesn't work on anyone else's machine out of the box.
 
+![This text means I can't link shit](screenie.png)
+
 Might have to do with the fact that it needs a server to live and feed off of.
 ## But this is for practice.
 - Uses multiple node modules 
@@ -14,8 +16,9 @@ Might have to do with the fact that it needs a server to live and feed off of.
 - Precursor to something bigger. (I know, ominous)
 ## Next Up
 - CSS 
-- Actual rooms
-  - Group chats
+- Room Extras
+  - Create Rooms
+  - Delete Rooms
   - Direct messages
 - Saving users
 - Dice roller
