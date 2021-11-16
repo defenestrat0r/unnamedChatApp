@@ -1,11 +1,9 @@
 # unnamedChatApp
 A chat app built with express, socket.io, node.js and keeping my eyes open too long
 ## I am aware it is ugly
-...and that it probably doesn't work on anyone else's machine out of the box.
+It's currently being hosted on heroku, but it's got issues (why wouldn't it? It's jank as hell)
+https://unnamed-chat-app.herokuapp.com/
 
-![This text means I can't link shit](public/assets/screenie.png)
-
-Might have to do with the fact that it needs a server to live and feed off of.
 ## But this is for practice.
 - Uses multiple node modules 
   - express (for hosting and general node framework malarkey)
