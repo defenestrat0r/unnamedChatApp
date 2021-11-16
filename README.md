@@ -2,6 +2,7 @@
 A chat app built with express, socket.io, node.js and keeping my eyes open too long
 ## I am aware it is ugly
 It's currently being hosted on heroku, but it's got issues (why wouldn't it? It's jank as hell)
+
 https://unnamed-chat-app.herokuapp.com/
 
 ## But this is for practice.
@@ -20,4 +21,4 @@ https://unnamed-chat-app.herokuapp.com/
   - Direct messages
 - Saving users
 - Dice roller
-- Possibly hosting it elsewhere (Firebase?)
+- Firebase backend to store things
