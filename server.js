@@ -99,8 +99,8 @@ io.on('connection', socket => {
     });
 })
 
-// Start server on port 3000 or another port if 3000 is unavailable
-const PORT = 3000 || process.env.PORT;
+// Server starts according to app/whatever we deploy it on, and port 3000 on local
+const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 /*-----Utility stuff*/
