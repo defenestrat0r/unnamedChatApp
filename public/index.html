@@ -6,49 +6,90 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
+		<!--Bulma CSS-->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
 		<title>Chatot</title>
 	</head>
 
 	<body>
-		<div id="container"> 
 
-			<header>
-				<h1>Chatot</h1>
+		<section id="header" class="hero is-primary"> 
+			
+			<header class="hero-body has-text-centered">
+				<p class="title">Chatot</p>
+				<p class="subtitle">Yes, like the pokemon.</p>
 			</header>
 
-			<main>
-				<form action="chat.html">
-					<!--Username-->
-					<div>
-						<label for="username">Username</label>
-						<input
-						type="text"
-						name="username"
-						id="username"
-						placeholder="Enter username"
-						required
-						/>
+		</section>
+
+		<section id="form" class="section">
+
+			<div class="tile is-ancestor">
+				<div class="container tile is-parent is-4">
+
+					<div class="tile is-child card">
+						
+						<form action="chat.html" class="card-content">
+
+							<!--Username-->
+							<div class="field">
+
+								<label class="label is-large">Username</label>
+
+								<div class="control">
+									<input
+									type="text"
+									name="username"
+									id="username"
+									placeholder="Username"
+									class="input is-medium is-primary is-centered"
+									required
+									/>
+								</div>
+								<p class="help">Enter a username, pal</p>
+
+							</div>
+							
+							<!--Room Select-->
+							<div class="field">
+								
+								<label class="label is-large">Room</label>
+								
+								<!--Dropdown to pick room-->
+								<div class="control">
+									<span class="select is-primary is-medium">
+										<select name="room" id="room">
+											<option value="Chaotic Stupid">Chaotic Stupid</option>
+											<option value="Saltmarshers">Saltmarshers</option>
+											<option value="Strahd Hunters">Strahd Hunters</option>
+											<option value="Teyvat">Teyvat</option>
+											<option value="Oneshot Questers">Oneshot Questers</option>
+										</select>
+									</span>
+									<p class="help">Pick a room, any room</p>
+								</div>
+
+							</div>
+
+							<div class="field">
+								<div class="control">
+									<div class="buttons">
+										<button type="submit" class="button is-primary is-outlined is-medium">
+											Join Chat
+										</button>
+									</div>
+								</div>
+							</div>
+
+						</form>
+
 					</div>
-					
-					<!--Room Select-->
-					<div>
-						<label for="room">Room</label>
-						<!--Dropdown to pick room-->
-						<select name="room" id="room">
-							<option value="Chaotic Stupid">Chaotic Stupid</option>
-							<option value="Saltmarshers">Saltmarshers</option>
-							<option value="Strahd Hunters">Strahd Hunters</option>
-							<option value="Teyvat">Teyvat</option>
-							<option value="Oneshot Questers">Oneshot Questers</option>
-						</select>
-					</div>
 
-					<button type="submit" class="btn">Join Chat</button>
+				</div>
+			</div>
 
-				</form>
-			</main>
-
-		</div>
+		</section>
 	</body>
 
 </html>
