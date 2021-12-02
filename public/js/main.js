@@ -1,7 +1,10 @@
 /*-----Get variables (I know they're constants, shut up) */
 const form = document.querySelector('#chat');
+
 const messageInput = document.querySelector('#textbox');
 const messages = document.querySelector('#messages');
+const messagebox = document.querySelector('#message-display');
+
 const roomName = document.querySelector('#room-name');
 const userList = document.querySelector('#users');
 
@@ -14,7 +17,7 @@ socket.on('message', msg => {
     displayMessage(msg);
 
     // Scroll to newest message 
-    messages.scrollTop = messages.scrollHeight;
+    messagebox.scrollTop = messages.scrollHeight;
 })
 
 // Get username and room from url
@@ -54,9 +57,17 @@ form.addEventListener('submit', (e) => {
  */
 function displayMessage(message)
 {
-    const mess = document.createElement('li');
-    mess.innerHTML = `${message.username}, ${message.time}: ${message.text}`;
-    messages.append(mess);
+    const newmsg = document.createElement('div');
+    newmsg.innerHTML = `
+            <article class="message is-small is-primary">
+                <div class="message-header">
+                    <p>${message.username}</p>
+                    <p>${message.time}</p>
+                </div>
+                <div class="message-body"> ${message.text} </div>
+            </article>
+    `;
+    messages.append(newmsg);
 }
 
 /**
