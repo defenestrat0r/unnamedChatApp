@@ -54,20 +54,65 @@ form.addEventListener('submit', (e) => {
 /* Pretty straightforward
  * Creates a message as a list item
  * Appends it to list
- */
+*/
 function displayMessage(message)
 {
-    const newmsg = document.createElement('div');
-    newmsg.innerHTML = `
-            <article class="message is-small is-primary">
-                <div class="message-header">
-                    <p>${message.username}</p>
-                    <p>${message.time}</p>
-                </div>
-                <div class="message-body"> ${message.text} </div>
-            </article>
-    `;
-    messages.append(newmsg);
+    
+    /* Creating DOM elements using DOM methods 
+    *  Who thought html strings was a good idea? Not me
+    *  Commented code is what its supposed to look like put together
+    */
+   
+   /*newMsgDiv.innerHTML = `
+   <article class="message is-small is-primary">
+   <div class="message-header">
+   <p>${message.username}</p>
+   <p>${message.time}</p>
+   </div>
+   <div class="message-body"> ${message.text} </div>
+   </article>
+   `;*/
+   
+   /* Change message looks based on who sent them 
+   *  Admin - Yello
+   *  Message you sent - Primary colors (and displayed name is 'You' instead of usernam)
+   *  Other person sent message - Dark colors? (TODO: secondary color for this)
+   */
+    const msgArticle = document.createElement('article');
+    if(message.username === 'Admin')
+    { msgArticle.className = 'message is-small is-warning'; }
+    else if(message.username === username)
+    { 
+            msgArticle.className = 'message is-small is-primary'; 
+            message.username = 'You';
+    }
+    else
+    { msgArticle.className = 'message is-small is-dark'; }
+    
+    const msgHeaderLeft = document.createElement('p');
+    msgHeaderLeft.innerHTML = message.username;
+    const msgHeaderRight = document.createElement('p');
+    msgHeaderRight.innerHTML = message.time;
+    const msgHeader = document.createElement('div');
+    msgHeader.className = 'message-header';
+    /* Append username and time to message header */
+    msgHeader.appendChild(msgHeaderLeft);
+    msgHeader.appendChild(msgHeaderRight);
+    
+    const msgBody = document.createElement('div');
+    msgBody.className = 'message-body';
+    msgBody.innerHTML = message.text;
+    
+    /* Append header and body to message */
+    msgArticle.appendChild(msgHeader);
+    msgArticle.appendChild(msgBody);
+    
+    /* Append message to div */
+    const newMsgDiv = document.createElement('div');
+    newMsgDiv.appendChild(msgArticle);
+    
+    /* Append new message to the messages field */
+    messages.appendChild(newMsgDiv);
 }
 
 /**
