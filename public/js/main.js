@@ -24,8 +24,9 @@ socket.on('message', msg => {
 const { username, room } = Qs.parse(location.search, {
     ignoreQueryPrefix: true
 })
+
 // Send to server when joining room
-socket.emit('joinRoom', { username, room });
+//socket.emit('joinRoom', { username, room });
 
 // Get room information
 socket.on('usersInRoom', ({users, room}) => {

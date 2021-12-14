@@ -1,21 +1,42 @@
 /*-----Importing stuff we need */
-const express = require('express');
-const http = require('http');
-const socket = require('socket.io');
-const moment = require('moment');
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, set } from "firebase/database";
+import express from "express";
+import { createServer } from "http";
+import { Server } from "socket.io";
 
 /*-----Initializing and Teeing up the stuff we just imported */
 // Initialize express, which is framework to handle our node magic on a server
 const app = express();
 
 // Setup the server to handle socket.io
-const server = http.createServer(app);
+const server = createServer(app);
 
 // Initialize socket.io by feeding it the server we created with express 
-const io = socket(server);
+const io = new Server(server);
 
 // Set up static folder so everything can be referenced from here
 app.use(express.static('public'));
+
+/*-----Firebase stuff */
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+    apiKey: "AIzaSyCGsLf6NOphDxLbQ_yNtYJlm0bthgxSgOc",
+    authDomain: "chatot-e4673.firebaseapp.com",
+    databaseURL: "https://chatot-e4673-default-rtdb.firebaseio.com",
+    projectId: "chatot-e4673",
+    storageBucket: "chatot-e4673.appspot.com",
+    messagingSenderId: "829197495353",
+    appId: "1:829197495353:web:0a8ca81bec90c69511b1e8",
+    measurementId: "G-LR4RW8J81R"
+  };
+  
+  // Initialize Firebase
+  const firebaseApp = initializeApp(firebaseConfig);
+  
+  // Get database reference
+  const db = getDatabase(firebaseApp);
 
 /*-----Server Handling */
 // This runs when a client connects 
@@ -30,7 +51,13 @@ io.on('connection', socket => {
         /* Send the message object to client side
          * And we're going to make sure the messages only go to the specific room 
          */
-        io.to(user.room).emit('message', messageWrap(user.username,message)); 
+        const chatObj = messageWrap(user.username, message);
+        
+        // Write to database
+        writeMsgData(chatObj, socket.id);
+        
+        // Alert the room that a message has been sent
+        io.to(user.room).emit('message',chatObj); 
     });
 
     /* This runs when a user joins a room 
@@ -50,7 +77,8 @@ io.on('connection', socket => {
         /* Emit - Send to single client that connected / triggered this
          * This is specific to the user that joined, just to let them know they've connected successfully 
          */ 
-        socket.emit('message', messageWrap('Admin', `Holy smokes, ${user.username}! You connected!`));
+        let joinObj = messageWrap('Admin', `Holy smokes, ${user.username}! You connected!`);
+        socket.emit('message', joinObj);
 
         /* Broadcast - Emits to everyone except the user that connected / triggered this
          * Tells the channel someone has joined 
@@ -59,12 +87,13 @@ io.on('connection', socket => {
          * I know this is not how I usually type functions, but it's for better readability
          * Shut up 
          */
+        joinObj = messageWrap('Admin',`${user.username} has joined the party`);
         socket
         .broadcast
         .to(user.room)
         .emit(
-            'message', 
-            messageWrap('Admin',`${user.username} has joined the party`)
+            'message',
+            joinObj
             );
 
         // Sending users in room info
@@ -87,7 +116,8 @@ io.on('connection', socket => {
              * We only want this to send in the specific room the user disconnected in
              * Hence the to(user.room) thing
              */
-            io.to(user.room).emit('message', messageWrap('Admin',`${user.username} fell from a really high place`));
+            const disconnectObj = messageWrap('Admin',`${user.username} fell from a really high place`);
+            io.to(user.room).emit('message', disconnectObj);
 
             // Sending users in room info
             io.to(user.room).emit('usersInRoom', {
@@ -107,10 +137,17 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 // Turns message into an object
 function messageWrap(username, message)
 {
+    // All this because Moment isn't ES6 compatible 
+    let dateTime = new Date();
+    let hours = dateTime.getHours();
+    let mins= dateTime.getMinutes(); 
+    let sex = dateTime.getSeconds();
+    let timestamp = hours + " : " + mins + " : " + sex;
+
     return {
         username: username,
         text: message,
-        time: moment().format('h:mm a')
+        time: timestamp
     }
 }
 
@@ -140,3 +177,12 @@ function getUser(id) { return users.find(user => user.id === id); }
 
 // Simple get function to get users in the specified room 
 function getUsersInRoom(room) { return users.filter(user => user.room === room); }
+
+function writeMsgData(msgObj, socketID) {
+    const db = getDatabase();
+    set(ref(db, 'msg/' + socketID), {
+      username: msgObj.username,
+      content: msgObj.text,
+      time: msgObj.time
+    });
+  }
