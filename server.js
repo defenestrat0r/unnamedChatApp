@@ -4,6 +4,7 @@ import { getDatabase, ref, set } from "firebase/database";
 import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
+import { format } from 'date-fns'
 
 /*-----Initializing and Teeing up the stuff we just imported */
 // Initialize express, which is framework to handle our node magic on a server
@@ -137,12 +138,8 @@ server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 // Turns message into an object
 function messageWrap(username, message)
 {
-    // All this because Moment isn't ES6 compatible 
-    let dateTime = new Date();
-    let hours = dateTime.getHours();
-    let mins= dateTime.getMinutes(); 
-    let sex = dateTime.getSeconds();
-    let timestamp = hours + " : " + mins + " : " + sex;
+    // All my homies use date-fns now 
+    let timestamp = format(new Date(), 'HH:mm:ss');
 
     return {
         username: username,
